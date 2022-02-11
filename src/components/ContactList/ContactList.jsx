@@ -1,7 +1,7 @@
-import Contact from '../Contact/Contact';
+import Contact from 'components/Contact/Contact';
 import { ListStyled } from './ContactList.styled';
 import {  useDispatch, useSelector } from 'react-redux'
-import {removeContact} from '../../redux/contacts/contacts-actions'
+import {removeContact} from 'redux/contacts/contacts-operation'
 import toast from 'react-hot-toast';
 
 export default function ContactList() {
@@ -20,12 +20,12 @@ export default function ContactList() {
             .filter(contact =>
               contact.name.toLowerCase().includes(filter.toLowerCase())
             )
-            .map(({ id, name, number }) => (
+            .map(({ id, name, phone }) => (
               <li key={id}>
                 <Contact
                   id={id}
                   name={name}
-                  number={number}
+                  phone={phone}
                   deleteContact={deleteContact}
                 />
               </li>

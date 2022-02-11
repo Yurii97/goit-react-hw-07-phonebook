@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     dispatch(contactsOperation.fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

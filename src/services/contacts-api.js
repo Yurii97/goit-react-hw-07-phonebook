@@ -8,12 +8,12 @@ export async function fetchContacts() {
   return resp.data;
 }
 
-export async function addContacts() {
-  const resp = await axios.get('/contacts');
-  return resp;
+export async function addContacts(contact) {
+  const resp = await axios.post('/contacts', contact);
+  return resp.data;
 }
 
 export async function deleteContacts(id) {
-  const resp = await axios.get(`/contacts/${id}`);
-  return resp;
+  const resp = await axios.delete(`/contacts/${id}`);
+  return resp.data;
 }

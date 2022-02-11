@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { FormStyled } from './ContactForm.styled';
 import toast from 'react-hot-toast';
 import {  useDispatch, useSelector } from 'react-redux'
-import {addContact} from '../../redux/contacts/contacts-actions'
+import {addContact} from 'redux/contacts/contacts-operation'
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -27,10 +26,9 @@ export default function ContactForm() {
 
   const submitForm = e => {
     e.preventDefault();
-    const newContact = {
-      id: nanoid(),
+    const newContact = {      
       name,
-      number,
+      phone: number,
     };
     addNewContact(newContact);
     setNumber('');
