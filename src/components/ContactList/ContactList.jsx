@@ -4,9 +4,10 @@ import {  useDispatch, useSelector } from 'react-redux'
 import {removeContact} from 'redux/contacts/contacts-operation'
 import toast from 'react-hot-toast';
 import Spiner from "components/Spiner/Spiner"
+import getContacts from 'redux/contacts/contacts-selector'
 
 export default function ContactList() {
-  const {contacts, filter, loading} = useSelector(state=>state.contacts)
+  const {contacts, filter, loading} = useSelector(getContacts)
   const dispatch = useDispatch();
   
   const deleteContact =(id)=>{

@@ -3,11 +3,12 @@ import { FormStyled } from './ContactForm.styled';
 import toast from 'react-hot-toast';
 import {  useDispatch, useSelector } from 'react-redux'
 import {addContact} from 'redux/contacts/contacts-operation'
+import getContacts from 'redux/contacts/contacts-selector'
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(state=>state.contacts.contacts)
+  const { contacts } = useSelector(getContacts)
   const dispatch = useDispatch();
 
   const handleChange = e => {
