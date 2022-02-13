@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { FormStyled } from './ContactForm.styled';
 import toast from 'react-hot-toast';
-import {  useDispatch, useSelector } from 'react-redux'
-import {addContact} from 'redux/contacts/contacts-operation'
-import getContacts from 'redux/contacts/contacts-selector'
+import {useGetContactQuery, useAddContactMutation } from 'services/contactsApi';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const { contacts } = useSelector(getContacts)
-  const dispatch = useDispatch();
+  const [addContact] = useAddContactMutation();
+  const { data } = useGetContactQuery();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -38,14 +36,14 @@ export default function ContactForm() {
 
   const addNewContact = newContact => {
     if (
-      contacts.some(
+      data.some(
         contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
       )
     ) {
       toast.error('contact with such name already exists');
       return;
     }
-    dispatch(addContact(newContact));
+    addContact(newContact);
     toast.success('contact added');
   };
 

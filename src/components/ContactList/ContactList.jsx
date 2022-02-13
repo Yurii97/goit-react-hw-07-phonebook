@@ -1,24 +1,26 @@
 import Contact from 'components/Contact/Contact';
-import { ListStyled } from './ContactList.styled';
-import {  useDispatch, useSelector } from 'react-redux'
-import {removeContact} from 'redux/contacts/contacts-operation'
+import { ListStyled, ErrorMasage } from './ContactList.styled';
+import {   useSelector } from 'react-redux'
 import toast from 'react-hot-toast';
 import Spiner from "components/Spiner/Spiner"
-import getContacts from 'redux/contacts/contacts-selector'
+import {useGetContactQuery, useDeleteContactMutation} from 'services/contactsApi'
 
 export default function ContactList() {
-  const {contacts, filter, loading} = useSelector(getContacts)
-  const dispatch = useDispatch();
+  const { filter} = useSelector(state=>state)
+  const [deleteContact]=useDeleteContactMutation();
+  const { data, error, isError, isFetching } = useGetContactQuery();
   
-  const deleteContact =(id)=>{
-    dispatch(removeContact(id))
+  const removeContact = (id) => {
+    deleteContact(id)
     toast.success('delete is complete');
   }
   return (
     <>
       <section>
-        {loading ? <Spiner /> : <ListStyled>
-          {contacts.length > 0 && contacts
+        {isFetching && <Spiner />}
+        {isError && <ErrorMasage>{error.error}</ErrorMasage>}
+        {data && !isError && <ListStyled>
+          {data.length > 0 && data
             .filter(contact =>
               contact.name.toLowerCase().includes(filter.toLowerCase())
             )
@@ -28,7 +30,7 @@ export default function ContactList() {
                   id={id}
                   name={name}
                   phone={phone}
-                  deleteContact={deleteContact}
+                  removeContact={removeContact}
                 />
               </li>
             ))}

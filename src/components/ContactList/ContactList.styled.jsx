@@ -5,3 +5,6 @@ export const ListStyled = styled.ul`
     margin-top: 7px;
   }
 `;
+export const ErrorMasage = styled.p`
+color: red;
+`
