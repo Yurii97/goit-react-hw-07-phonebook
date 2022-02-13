@@ -1,9 +1,9 @@
 import { TailSpin } from 'react-loader-spinner';
 
-function Spiner() {
+function Spiner({size}) {
   return (
-    <div>
-      <TailSpin color="#00BFFF" margin="0 auto" height={50} width={50} />
+    <div style={{width: size, height: size}}>
+      <TailSpin color="#00BFFF" margin="0 auto" height={"inherit"} width={ "inherit"}/>
     </div>
   );
 }

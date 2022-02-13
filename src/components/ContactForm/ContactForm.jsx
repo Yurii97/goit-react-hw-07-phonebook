@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { FormStyled } from './ContactForm.styled';
 import toast from 'react-hot-toast';
 import {useGetContactQuery, useAddContactMutation } from 'services/contactsApi';
+import Spiner from 'components/Spiner/Spiner';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [addContact] = useAddContactMutation();
+  const [addContact, {isLoading}] = useAddContactMutation();
   const { data } = useGetContactQuery();
 
   const handleChange = e => {
@@ -74,7 +75,9 @@ export default function ContactForm() {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" disabled={isLoading} >
+          {isLoading && <Spiner size={12}/>}
+          Add contact</button>
       </FormStyled>
     </>
   );

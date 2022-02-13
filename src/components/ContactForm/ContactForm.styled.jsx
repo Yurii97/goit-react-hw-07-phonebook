@@ -13,6 +13,7 @@ export const FormStyled = styled.form`
     margin-top: 20px;
   }
   & button {
+    display: flex;
     margin-top: 20px;
     :hover,
     :focus {

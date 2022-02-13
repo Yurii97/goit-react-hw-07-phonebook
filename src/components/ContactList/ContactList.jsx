@@ -17,7 +17,7 @@ export default function ContactList() {
   return (
     <>
       <section>
-        {isFetching && <Spiner />}
+        {isFetching && <Spiner size={50}/>}
         {isError && <ErrorMasage>{error.error}</ErrorMasage>}
         {data && !isError && <ListStyled>
           {data.length > 0 && data
